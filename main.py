@@ -1,29 +1,95 @@
-from icecream import ic
-from rich import print
-from rich.panel import Panel
+import os
 import time
-from rich.progress import track, Progress, SpinnerColumn, TextColumn, BarColumn
-from worksheet1 import data
-from rich.align import Align
-from rich.padding import Padding
-import rich.box as rich_box
 from rich.console import Console
+from rich.panel import Panel
 from rich.text import Text
+from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn
+from rich.align import Align
+from rich.padding import Padding   
 from rich.table import Table
-from pyfiglet import print_figlet, Figlet
-from rich.layout import Layout
+from pyfiglet import Figlet
+import rich.box as rich_box
 import questionary as que
+from worksheet1 import data
 
+# Constants
+APP_NAME = "React & Prepare"
+GITHUB_LINK = "https://github.com/AkshatBhatt-786/React-Prep"
+DEVELOPER_NAME = "Akshat S Bhatt"
+TERMS_TEXT = """
+Terms and Conditions
+
+- This app is for personal and educational use only.
+- Feel free to share, but credit must be given to:
+  - Developer: Akshat S Bhatt
+  - Idea: React & Prepare
+  - GitHub Link: https://github.com/AkshatBhatt-786/React-Prep
+
+- Commercial use is strictly prohibited.
+- The developer is not liable for any outcomes resulting from app usage.
+"""
+
+# Initialize console
 console = Console(record=True)
-ic.configureOutput(prefix="[DDCET-2025](_<) ")
 
-ic("Starting App")
+# Clear window function
+def clear_window():
+    """Clears the console screen based on the OS."""
+    if os.name == 'nt':  # For Windows
+        os.system('cls')
+    else:  # For macOS and Linux
+        os.system('clear')
 
+# Load data function
 def load_data(key):
+    """Loads data from the worksheet."""
     return data["chemical_reactions_&_equations"][key]
 
+# Function to display the terms and conditions
+def display_terms():
+    """Displays the terms and conditions in a rich panel."""
+    terms_message = Panel(
+        Text(TERMS_TEXT, justify="left"),
+        border_style="bold yellow",
+        subtitle="[cyan]React And Prepare[/cyan]",
+        subtitle_align="right",
+        box=rich_box.DOUBLE
+    )
+    console.print(terms_message, justify="center")
 
-def chem_chapter_1():
+# Function to display the welcome message
+def display_welcome():
+    """Displays the welcome message with ASCII art."""
+    figlet = Figlet(font="script")
+    ascii_art = figlet.renderText(APP_NAME)
+    console.print(Align.center(ascii_art, vertical="middle"), style="bold blue")
+    
+    welcome_message = Panel(
+        Text(f"Welcome to {APP_NAME}\n\nPrepare smarter, react confidently, and master your MCQs!", justify="center"),
+        border_style="bold green",
+        box=rich_box.DOUBLE
+    )
+    console.print(welcome_message, justify="center")
+
+# Function to display subject selection menu
+def select_subject():
+    """Prompts the user to select a subject."""
+    return que.select(
+        "Choose your subject:",
+        choices=["Chemistry", "Physics", "Computer Science"],
+        use_arrow_keys=True
+    ).ask()
+
+
+def display_logo_starwars():
+    figlet = Figlet(font="starwars")
+    ascii_art = figlet.renderText("React & Prepare")
+
+    # Load and display questions, options, and answers
+    console.print(Align.center(ascii_art))
+# Function to handle Chemistry questions
+def handle_chemistry():
+    """Handles chemistry practice logic."""
     questions = load_data("questions")
     options = load_data("options")
     answers = load_data("answer-key")
@@ -33,40 +99,36 @@ def chem_chapter_1():
         title="[bold green]Chapter 1[/bold green]",
         border_style="magenta",
     )
-
-    figlet = Figlet(font="starwars")
-    ascii_art = figlet.renderText("ddcet")
-
-    # Load questions, options, and answers
-    console.print(Align.center(ascii_art))
+    display_logo_starwars()
     console.print(title)
     console.print(f":books: [cyan]Total Questions: [bold]{len(questions)}[/bold][/cyan]\n")
+    
+    # Show loading progress
     with Progress(
-            SpinnerColumn(style="bold magenta", finished_text=f"\n[bold magenta]Question {len(questions)} loaded![/bold magenta]", spinner_name="dots"),
-            TextColumn("[progress.description]{task.description}"),
-            BarColumn(bar_width=None, style="bold blue", complete_style="bold green"),
-            TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
-            TextColumn("[bold cyan]{task.completed}/{task.total}"),
-            transient=True,
-            console=console
+        SpinnerColumn(style="bold magenta", spinner_name="dots"),
+        TextColumn("[progress.description]{task.description}"),
+        BarColumn(bar_width=None, style="bold blue", complete_style="bold green"),
+        TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
+        TextColumn("[bold cyan]{task.completed}/{task.total}"),
+        transient=True,
+        console=console
     ) as progress:
         task = progress.add_task("[cyan]Loading questions...", total=len(questions))
         for _ in questions:
             time.sleep(0.5)  # Simulate loading delay
             progress.update(task, advance=1)
-    # Display questions with options in table format
+    
+    # Display each question and options in table format
     for q_no, question in questions.items():
-        gradient_text = Text(f"Que {q_no}: {question}", style="bold")
-        gradient_text.stylize("bold red", 0, 4)
-        gradient_text.stylize("bold grey50", 4, 20)
-        gradient_text.stylize("bold grey42", 20, len(gradient_text))
+        gradient_text = Text(f"Que {q_no}: {question}", style="bold red")
+        gradient_text.stylize("bold grey50", 4)
 
-        # Print question with padding
         console.print(Padding(gradient_text, pad=(1, 0, 0, 0)))
 
-        # Create and populate the options table
+        # Create and display the options table
         table = Table(
             show_header=False,
+            
             box=rich_box.SQUARE_DOUBLE_HEAD,
             padding=(0, 2),
             show_edge=True,
@@ -75,7 +137,6 @@ def chem_chapter_1():
         table.add_column("Option", justify="center", style="bold yellow")
         table.add_column("Choice", justify="left", style="white")
         opts = options[q_no]
-
         table.add_row("A", opts[0])
         table.add_row("B", opts[1])
         table.add_row("C", opts[2])
@@ -83,7 +144,7 @@ def chem_chapter_1():
 
         console.print(table)
 
-        # Highlight the correct answer
+        # Highlight correct answer
         correct_answer = answers[q_no].upper()
         correct_choice = opts["ABCD".index(correct_answer)]
         console.print(
@@ -93,17 +154,57 @@ def chem_chapter_1():
             )
         )
 
-        if int(q_no) == int(len(questions)):
-            console.rule("[bold blue]:arrow_forward: Press Enter to Exit :arrow_backward:[/bold blue]")
-        else:
-            console.rule("[bold blue]:arrow_forward: Next Question :arrow_backward:[/bold blue]")
+def display_logo():
+    figlet = Figlet(font="script")
+    ascii_art = figlet.renderText(APP_NAME)
+    console.print(Align.center(ascii_art, vertical="middle"), style="bold blue")
 
+def comming_soon():
+    display_logo_starwars()
 
+    coming_soon_text = Panel(
+    Text("🚀 Coming Soon... Stay tuned for updates!", style="bold yellow", justify="center"),
+    border_style="bold blue",
+    box=rich_box.SQUARE
+    ,
+    padding=(1, 2)
+    )
+    console.print(coming_soon_text)
+
+# Main function to run the app
 def main():
-    figlet = Figlet(font="starwars")
-    ascii_art = figlet.renderText("ddcet")
+    display_welcome()  # Display welcome message and ASCII art
+    display_terms()  # Display terms and conditions
+
+    # User agreement
+    user_cmd = que.press_any_key_to_continue("\n▶ Press [Enter] to agree and start the app! ◀").ask()
+    clear_window()
+
+    display_logo()
     while True:
-        user_cmd =que.press_any_key_to_continue("Press Enter to Start the app")
+        clear_window()
+        display_logo()
+        subject = select_subject()  # Select subject
+        if subject == "Chemistry":
+            clear_window()
+            handle_chemistry()  # Handle chemistry questions
+        elif subject == "Physics":
+            clear_window()
+            comming_soon()
+        elif subject == "Computer Science":
+            clear_window()
+            comming_soon()
+    
+        continue_prompt = que.select(
+            "Do you want to choose another subject?",
+            choices=["Yes", "No"],
+            use_arrow_keys=True
+        ).ask()
+        
+        if continue_prompt == "No":
+            print("Exiting the app. Have a great day!")
+            time.sleep(3)
+            break
 
 if __name__ == "__main__":
     main()
