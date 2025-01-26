@@ -12,13 +12,12 @@ from rich.text import Text
 from rich.table import Table
 from pyfiglet import print_figlet, Figlet
 from rich.layout import Layout
+import questionary as que
 
 console = Console(record=True)
-ic.configureOutput(prefix="<[Chemistry]/console>: ")
+ic.configureOutput(prefix="[DDCET-2025](_<) ")
 
-
-# Function to load questions, options, or answers
-
+ic("Starting App")
 
 def load_data(key):
     return data["chemical_reactions_&_equations"][key]
@@ -32,7 +31,6 @@ def chem_chapter_1():
     title = Panel(
         Text("Chemical Reactions & Equations\nMCQ Question Bank", style="bold blue", justify="center"),
         title="[bold green]Chapter 1[/bold green]",
-        subtitle="[italic cyan]Test your knowledge![/italic cyan]",
         border_style="magenta",
     )
 
@@ -44,7 +42,7 @@ def chem_chapter_1():
     console.print(title)
     console.print(f":books: [cyan]Total Questions: [bold]{len(questions)}[/bold][/cyan]\n")
     with Progress(
-            SpinnerColumn(style="bold magenta"),
+            SpinnerColumn(style="bold magenta", finished_text=f"\n[bold magenta]Question {len(questions)} loaded![/bold magenta]", spinner_name="dots"),
             TextColumn("[progress.description]{task.description}"),
             BarColumn(bar_width=None, style="bold blue", complete_style="bold green"),
             TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
@@ -60,8 +58,8 @@ def chem_chapter_1():
     for q_no, question in questions.items():
         gradient_text = Text(f"Que {q_no}: {question}", style="bold")
         gradient_text.stylize("bold red", 0, 4)
-        gradient_text.stylize("bold yellow", 4, 20)
-        gradient_text.stylize("bold salmon", 20, len(gradient_text))
+        gradient_text.stylize("bold grey50", 4, 20)
+        gradient_text.stylize("bold grey42", 20, len(gradient_text))
 
         # Print question with padding
         console.print(Padding(gradient_text, pad=(1, 0, 0, 0)))
@@ -100,7 +98,12 @@ def chem_chapter_1():
         else:
             console.rule("[bold blue]:arrow_forward: Next Question :arrow_backward:[/bold blue]")
 
-# Run the function to display the content
-if __name__ == "__main__":
 
-    chem_chapter_1()
+def main():
+    figlet = Figlet(font="starwars")
+    ascii_art = figlet.renderText("ddcet")
+    while True:
+        user_cmd =que.press_any_key_to_continue("Press Enter to Start the app")
+
+if __name__ == "__main__":
+    main()
