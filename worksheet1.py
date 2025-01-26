@@ -72,7 +72,29 @@ data = {
             65: "What is the role of water in the reaction CaO + H₂O → Ca(OH)₂ ?",
             66: "Which of the following explains why magnesium ribbon must be cleaned before burning?",
             67: "Identify the precipitate in the reaction BaCl₂ + Na₂SO₄ → BaSO₄ + 2NaCl.",
-            68: "What type of bond is formed between hydrogen and chlorine in hydrogen chloride (HCL)?"
+            68: "What type of bond is formed between hydrogen and chlorine in hydrogen chloride (HCL)?",
+            69: "What is the product formed when calcium oxide reacts with water?",
+            70: "What type of reaction occurs when calcium oxide and water combine to form calcium hydroxide?",
+            71: "In the reaction between calcium oxide and water, what is released as a byproduct? ",
+            72: "What is the chemical formula for calcium oxide?",
+            73: "During the reaction of calcium oxide with water, what physical change can be felt by touching the beaker?",
+            74: "Which of the following statements is true regarding combination reactions?",
+            75: "If calcium oxide is added to water and no heat is felt, what could be a possible explanation?",
+            76: "What is the product formed when calcium hydroxide reacts with carbon dioxide in the air?",
+            77: "What is the chemical formula for slaked lime?",
+            78: "Which of the following reactions is an example of a combination reaction?",
+            79: "If a wall is whitewashed and no calcium carbonate layer forms after three days, what could be a possible reason?",
+            80: "What type of reaction is respiration classified as? ",
+            81: "In the reaction of glucose with oxygen, what are the products formed?",
+            82: "Which of the following is NOT an example of an exothermic reaction?",
+            83: "What is the primary use of slaked lime in construction?",
+            84: "How long does it typically take for calcium carbonate to form on whitewashed walls",
+            85: "What is the balanced chemical equation for the reaction of glucose with oxygen during respiration?",
+            86: "What is the state of calcium carbonate when it is formed from the reaction of calcium hydroxide and carbon dioxide?",
+            87: "Which of the following is an example of a combination reaction?",
+            88: "What type of reaction is the burning of natural gas (CH4) in the presence of oxygen?",
+            89: "What is the chemical formula for calcium carbonate?",
+            90: "Which of the following processes is an example of an exothermic reaction in nature?"
         },
         "options": {
             1: [
@@ -482,6 +504,138 @@ data = {
                 "Covalent Bond",
                 "Metallic Bond",
                 "Hydrogen Bond"
+            ],
+            69: [
+                "Calcium carbonate",
+                "Calcium hydroxide",
+                "Calcium chloride",
+                "Calcium sulphate"
+            ],
+            70: [
+                "Decomposition reaction",
+                "Single displacement reaction",
+                "Redox reaction",
+                "Combination reaction"
+            ],
+            71: [
+                "Oxygen",
+                "Hydrogen",
+                "Heat",
+                "Carbon Dioxide"
+            ],
+            72: [
+                "Ca(OH)2",
+                "CaO",
+                "CaCo3",
+                "CaSo4"
+            ],
+            73: [
+                "Decrease in temperature",
+                "No change in temperature",
+                "Increase in temperature",
+                "Formation of gas bubbles"
+            ],
+            74: [
+                "They always produces gases bubbles",
+                "They involve the formation of multiple products",
+                "They result in the formation of a single product from two or more reactant",
+                "They cannot be exothermic"
+            ],
+            75: [
+                "The reaction is endothermic",
+                "The calcium is impure",
+                "The water is too cold",
+                "The reaction is incomplete"
+            ],
+            76: [
+                "Calcium Oxide",
+                "Calcium Carbonate",
+                "Calcium Sulphate",
+                "Calcium Chloride"
+            ],
+            77: [
+                "CaO",
+                "Ca(OH)2",
+                "CaCO3",
+                "CaSo4"
+            ],
+            78: [
+                "Ca(OH)2 + CO2 → CaCO3 + H2O",
+                "C(s) + O2(g) → CO2(g)",
+                "2H2(g) + O2(g) → 2H2O(l)",
+                "All of Above"
+            ],
+            79: [
+                "The slaked lime was impure.",
+                "There was insufficient carbon dioxide in the air.",
+                "The temperature was too low",
+                "All of Above"
+            ],
+            80: [
+                "Endothermic reaction",
+                "Combination reaction",
+                "Exothermic reaction",
+                "Decomposition reaction"
+            ],
+            81: [
+                "Carbon dioxide and Water",
+                "Oxygen and energy",
+                "Glucose and carbon dioxide",
+                "Water and glucose"
+            ],
+            82: [
+                "Burning of natural gas",
+                "Respiration",
+                "Formation of water from hydrogen and oxygen",
+                "Photosynthesis"
+            ],
+            83: [
+                "To create cement",
+                "For white washing walls",
+                "As a fertilizers",
+                "To make glass"
+            ],
+            84: [
+                "Immediately",
+                "1 day",
+                "2 to 3 days",
+                "1 week"
+            ],
+            85: [
+                "C6H12O6 + 6O2 → 6CO2 + 6H2O + energy",
+                "C6H12O6 + O2 → CO2 + H2O + energy",
+                "C6H12O6 + 6O2 → 6CO2 + 6H2O",
+                "C6H12O6 + 6O2 + energy → 6CO2 + 6H2O"
+            ],
+            86: [
+                "Solid",
+                "Liquid",
+                "Gas",
+                "Aqueous"
+            ],
+            87: [
+                "2H2 + O2 → 2H2O",
+                "Ca(OH)2 + CO2 → CaCO3 + H2O",
+                "C(s) + O2(g) → CO2(g)",
+                "All of Above"
+            ],
+            88: [
+                "Endothermic reaction",
+                "Combination reaction",
+                "Exothermic reaction",
+                "Decomposition reaction"
+            ],
+            89: [
+                "Ca(OH)2",
+                "CaO",
+                "CaCo3",
+                "CaSo4"
+            ],
+            90: [
+                "Photosynthesis",
+                "Melting of ice",
+                "Respiration",
+                "Boiling of water"
             ]
         },
         "answer-key": {
@@ -552,7 +706,34 @@ data = {
             65: "a",
             66: "b",
             67: "a",
-            68: "b"
+            68: "b",
+            69: "b",
+            70: "d",
+            71: "c",
+            72: "b",
+            73: "c",
+            74: "c",
+            75: "a",
+            76: "b",
+            77: "b",
+            78: "d",
+            79: "d",
+            80: "c",
+            81: "a",
+            82: "d",
+            83: "b",
+            84: "c",
+            85: "a",
+            86: "a",
+            87: "d",
+            88: "c",
+            89: "c",
+            90: "c"
         }
     }
 }
+
+import pickle
+
+with open(r"C:\Users\aksha\OneDrive\Desktop\Sem6\ddcet\chemistry\React&Prepare\database\chemistry.chemical-reaction-and-equations(v1.0).db", "wb") as f:
+    pickle.dump(data, f)
