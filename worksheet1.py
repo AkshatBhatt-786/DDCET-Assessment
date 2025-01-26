@@ -2,6 +2,8 @@
 
 data = {
     "chemical_reactions_&_equations": {
+        "chapter": "1",
+        "chapter-name": "Chemical Reactions & Equations",
         "questions": {
             1: "What happens when milk is left at room temperature during summers?",
             2: "What is the result of exposing an iron tawa to a humid atmosphere?",

@@ -1,5 +1,8 @@
 import os
+import sys
 import time
+import pickle
+from icecream import ic
 from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
@@ -84,19 +87,47 @@ def select_subject():
 def display_logo_starwars():
     figlet = Figlet(font="starwars")
     ascii_art = figlet.renderText("React & Prepare")
-
-    # Load and display questions, options, and answers
     console.print(Align.center(ascii_art))
-# Function to handle Chemistry questions
+# Function to handle Chemi
+def getResourcePath(filepath):
+    try:
+        base_path = sys._MEIPASS
+    except AttributeError:
+        base_path = os.path.abspath(".")
+    
+    return os.path.join(base_path, filepath)
+#stry questions
 def handle_chemistry():
     """Handles chemistry practice logic."""
+    data = None
+    while True:
+        chapter_selection = que.select("Choose Chemistry Chapter you want to prepare ?", choices=["Chapter 1: Chemical Reactions and Equations", "Chapter 2: Acid Bases & Salts"], instruction="Use arrow keys").ask()
+
+        if chapter_selection == "Chapter 1: Chemical Reactions and Equations":
+            filepath = getResourcePath("database\\chemistry.chemical-reaction-and-equations(v1.0).db")
+            with open(filepath, "rb") as f:
+                data = pickle.load(f)
+                break
+        if chapter_selection == "Chapter 2: Acid Bases & Salts":
+            filepath = getResourcePath("database\\chemistry.acid-bases-salt(v1.0).db")
+            with open(filepath, "rb") as f:
+                data = pickle.load(f)
+                break
+        ic("Data is not available!")
+
+    if data is None:
+        ic("Data is not available!")
+        return
+
+    chapter_no = load_data("chapter")
+    chapter_name = load_data("chapter-name")
     questions = load_data("questions")
     options = load_data("options")
     answers = load_data("answer-key")
 
     title = Panel(
         Text("Chemical Reactions & Equations\nMCQ Question Bank", style="bold blue", justify="center"),
-        title="[bold green]Chapter 1[/bold green]",
+        title=f"[bold green]Chapter {chapter_no}[/bold green]",
         border_style="magenta",
     )
     display_logo_starwars()
@@ -128,7 +159,7 @@ def handle_chemistry():
         # Create and display the options table
         table = Table(
             show_header=False,
-            
+
             box=rich_box.SQUARE_DOUBLE_HEAD,
             padding=(0, 2),
             show_edge=True,
